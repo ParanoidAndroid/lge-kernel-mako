@@ -42,6 +42,8 @@
 #define MIN_FREQUENCY_UP_THRESHOLD		(11)
 #define MAX_FREQUENCY_UP_THRESHOLD		(100)
 #define MIN_FREQUENCY_DOWN_DIFFERENTIAL		(1)
+#define DBS_SYNC_FREQ        			(702000)
+#define DBS_OPTIMAL_FREQ      			(1296000)
 
 /*
  * The polling frequency of this governor depends on the capability of
@@ -132,6 +134,8 @@ static struct dbs_tuners {
 	.down_differential = DEF_FREQUENCY_DOWN_DIFFERENTIAL,
 	.ignore_nice = 0,
 	.powersave_bias = 0,
+	.sync_freq = DBS_SYNC_FREQ,
+	.optimal_freq = DBS_OPTIMAL_FREQ,
 	.sampling_rate = (MICRO_FREQUENCY_MIN_SAMPLE_RATE * 5)
 };
 
