@@ -1,3 +1,4 @@
+
 /*
  *  Copyright (C) 2011-2012, LG Eletronics,Inc. All rights reserved.
  *      LGIT LCD device driver
@@ -83,7 +84,7 @@ static int mipi_lgit_lcd_on(struct platform_device *pdev)
 
 	MIPI_OUTP(MIPI_DSI_BASE + 0x38, 0x10000000);
 	ret = mipi_dsi_cmds_tx(&lgit_tx_buf,
-			//      mipi_lgit_pdata->power_on_set_1,
+//			mipi_lgit_pdata->power_on_set_1,
 			faux123_power_on_set_1,
 			mipi_lgit_pdata->power_on_set_size_1);
 	MIPI_OUTP(MIPI_DSI_BASE + 0x38, 0x14000000);
@@ -198,6 +199,12 @@ static bool calc_checksum(int intArr[]) {
 	} else {
 		//pr_info("expecting %d, got this %d instead!", chksum, intArr[0]);
 		return false;
+
+
+
+
+
+
 	}
 }
 
@@ -359,7 +366,7 @@ static int mipi_lgit_lcd_probe(struct platform_device *pdev)
 
 	// make a copy of platform data
 	memcpy((void*)faux123_power_on_set_1, (void*)mipi_lgit_pdata->power_on_set_1, 
-	sizeof(faux123_power_on_set_1));
+		sizeof(faux123_power_on_set_1));
 
 	pr_info("%s start\n", __func__);
 
@@ -368,16 +375,16 @@ static int mipi_lgit_lcd_probe(struct platform_device *pdev)
 
 	rc = device_create_file(&pdev->dev, &dev_attr_kgamma_r);
 	if(rc !=0)
-	return -1;
+		return -1;
 	rc = device_create_file(&pdev->dev, &dev_attr_kgamma_g);
 	if(rc !=0)
-	return -1;
+		return -1;
 	rc = device_create_file(&pdev->dev, &dev_attr_kgamma_b);
 	if(rc !=0)
-	return -1;
+		return -1;
 	rc = device_create_file(&pdev->dev, &dev_attr_kgamma_ctrl);
 	if(rc !=0)
-	return -1;
+		return -1;
 
 	return 0;
 }

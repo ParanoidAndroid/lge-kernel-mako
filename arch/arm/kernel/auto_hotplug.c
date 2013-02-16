@@ -124,7 +124,6 @@ static struct kernel_param_ops min_online_cpus_ops =
 module_param_cb(min_online_cpus, &min_online_cpus_ops, &min_online_cpus, 0755);
 
 
-
 static void hotplug_decision_work_fn(struct work_struct *work)
 {
 	unsigned int running, disable_load, sampling_rate, enable_load, avg_running = 0;
@@ -212,7 +211,7 @@ static void hotplug_decision_work_fn(struct work_struct *work)
 				cancel_delayed_work(&hotplug_offline_work);
 			schedule_work(&hotplug_online_single_work);
 			return;
-		} else if ((avg_running <= disable_load) && (min_online_cpus < online_cpus)) {
+		}  else if ((avg_running <= disable_load) && (min_online_cpus < online_cpus)) {
 			/* Only queue a cpu_down() if there isn't one already pending */
 			if (!(delayed_work_pending(&hotplug_offline_work))) {
 				pr_info("auto_hotplug: Offlining CPU, avg running: %d\n", avg_running);
@@ -393,8 +392,8 @@ int __init auto_hotplug_init(void)
 	 * Give the system time to boot before fiddling with hotplugging.
 	 */
 	flags |= HOTPLUG_PAUSED;
-	schedule_delayed_work_on(0, &hotplug_decision_work, HZ * 10);
-	schedule_delayed_work(&hotplug_unpause_work, HZ * 20);
+	schedule_delayed_work_on(0, &hotplug_decision_work, HZ * 5);
+	schedule_delayed_work(&hotplug_unpause_work, HZ * 10);
 
 #ifdef CONFIG_HAS_EARLYSUSPEND
 	register_early_suspend(&auto_hotplug_suspend);

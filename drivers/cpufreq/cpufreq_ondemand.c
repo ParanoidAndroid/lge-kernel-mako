@@ -36,14 +36,12 @@
 #define DEF_SAMPLING_DOWN_FACTOR		(10)
 #define MAX_SAMPLING_DOWN_FACTOR		(100000)
 #define MICRO_FREQUENCY_DOWN_DIFFERENTIAL	(3)
-#define MICRO_FREQUENCY_UP_THRESHOLD		(48)
-#define MICRO_FREQUENCY_DEF_SAMPLE_RATE		(15000)
+#define MICRO_FREQUENCY_UP_THRESHOLD    (48)
+#define MICRO_FREQUENCY_DEF_SAMPLE_RATE    (15000)
 #define MICRO_FREQUENCY_MIN_SAMPLE_RATE		(10000)
 #define MIN_FREQUENCY_UP_THRESHOLD		(11)
 #define MAX_FREQUENCY_UP_THRESHOLD		(100)
 #define MIN_FREQUENCY_DOWN_DIFFERENTIAL		(1)
-#define DBS_SYNC_FREQ        			(702000)
-#define DBS_OPTIMAL_FREQ      			(1296000)
 
 /*
  * The polling frequency of this governor depends on the capability of
@@ -134,9 +132,6 @@ static struct dbs_tuners {
 	.down_differential = DEF_FREQUENCY_DOWN_DIFFERENTIAL,
 	.ignore_nice = 0,
 	.powersave_bias = 0,
-	.sync_freq = DBS_SYNC_FREQ,
-	.optimal_freq = DBS_OPTIMAL_FREQ,
-	.sampling_rate = (MICRO_FREQUENCY_MIN_SAMPLE_RATE * 5)
 };
 
 static inline u64 get_cpu_idle_time_jiffy(unsigned int cpu, u64 *wall)
@@ -991,7 +986,6 @@ static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 			/* Bring kernel and HW constraints together */
 			min_sampling_rate = MICRO_FREQUENCY_MIN_SAMPLE_RATE;
 			dbs_tuners_ins.sampling_rate = MICRO_FREQUENCY_DEF_SAMPLE_RATE;
-			
 			dbs_tuners_ins.io_is_busy = should_io_be_busy();
 		}
 		if (!cpu)
