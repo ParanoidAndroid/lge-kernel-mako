@@ -99,7 +99,7 @@ static int	audit_nlk_pid;
 static int	audit_rate_limit;
 
 /* Number of outstanding audit_buffers allowed. */
-static int	audit_backlog_limit = 64;
+static int	audit_backlog_limit = 32;
 static int	audit_backlog_wait_time = 60 * HZ;
 static int	audit_backlog_wait_overflow = 0;
 
