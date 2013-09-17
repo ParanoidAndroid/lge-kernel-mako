@@ -7,7 +7,7 @@
 #define BLK_BATCH_TIME	(HZ/50UL)
 
 /* Number of requests a "batching" process may submit */
-#define BLK_BATCH_REQ	32
+#define BLK_BATCH_REQ	64
 
 extern struct kmem_cache *blk_requestq_cachep;
 extern struct kobj_type blk_queue_ktype;
@@ -90,7 +90,7 @@ static inline struct request *__elv_next_request(struct request_queue *q)
 		 */
 		if (q->flush_pending_idx != q->flush_running_idx &&
 				!queue_flush_queueable(q)) {
-			q->flush_queue_delayed = 1;
+			q->flush_queue_delayed = 0;
 			return NULL;
 		}
 		if (unlikely(blk_queue_dead(q)) ||
