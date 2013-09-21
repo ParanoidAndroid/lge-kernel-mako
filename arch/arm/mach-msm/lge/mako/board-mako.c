@@ -80,6 +80,11 @@
 #include <asm/system_info.h>
 #include <asm/system_misc.h>
 
+#ifdef CONFIG_KEXEC_HARDBOOT
+#include <asm/kexec.h>
+#endif
+
+
 #include "msm_watchdog.h"
 #include "board-mako.h"
 #include "spm.h"
@@ -725,6 +730,11 @@ static void __init place_movable_zone(void)
 	movable_reserved_size = apq8064_reserve_info.max_unstable_size;
 	pr_info("movable zone start %lx size %lx\n",
 		movable_reserved_start, movable_reserved_size);
+#endif
+
+
+#ifdef CONFIG_KEXEC_HARDBOOT
+	memblock_remove(KEXEC_HB_PAGE_ADDR, SZ_4K);
 #endif
 }
 
